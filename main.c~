@@ -75,7 +75,7 @@ unsigned int checkIfStoppped() {
 }
 
 void startTimer() {
-  *PIT_MR = *PIT_MR | 6279 * 1000;
+  *PIT_MR = *PIT_MR | 6279000;
 }
 
 void enablePIT() {
