@@ -41,7 +41,6 @@ volatile unsigned int* 	PIT_PIVR = (volatile unsigned int*)(0xFFFFFD38);
 //IO PORT REGS
 volatile unsigned int* PIOB_PER = (volatile unsigned int*)0xFFFFF400;
 volatile unsigned int* PIOB_OER = (volatile unsigned int*)0xFFFFF410;
-volatile unsigned int* PIOB_ODSR = (volatile unsigned int*)0xFFFFF438;
 volatile unsigned int* PIOB_SODR = (volatile unsigned int*)0xFFFFF430;
 volatile unsigned int* PIOB_CODR = (volatile unsigned int*)0xFFFFF434;
 
