@@ -1,6 +1,6 @@
 dbgu_print_ascii(const char *a) {}
-#define TASK_1 1
-#define TASK_2 0
+#define TASK_1 0
+#define TASK_2 1
 #define TASK_3 0
 
 #define COUNT_FOR_1_MILISEC 6250
@@ -46,7 +46,7 @@ volatile unsigned int* PIOB_CODR = (volatile unsigned int*)0xFFFFF434;
 
 //DISPLAY
 void configureDisplay();
-void displayDigit(unsigned int digit)
+void displayDigit(unsigned int digit);
 void enableLeftDisplay();
 void disableLeftDisplay();
 void enableRightDisplay();
@@ -56,8 +56,12 @@ void disableRightDisplay();
 void configurePIT();
 void enablePIT();
 void disablePIT();
-void clearTimerStatusRegister() 
+void clearTimerStatusRegister(); 
 unsigned int checkIfTimerStoppped();
+
+
+void delay( int miliseconds);
+void clearAllSegments();
 
 int main() {
   configurePIT();
@@ -76,7 +80,7 @@ int main() {
     while(1) {
       clearAllSegments();
       displayDigit(counter);
-      delay(1000);
+      delay(5);
       counter++;
       if(counter == 10) counter = 0;
     }
@@ -169,7 +173,7 @@ void displayDigit(unsigned int digit) {
       *PIOB_SODR = THREE;
       break;
     case 4:
-      *PIOB_SODR =  FOUR
+      *PIOB_SODR =  FOUR;
       break;
     case 5:
       *PIOB_SODR = FIVE;
@@ -206,14 +210,16 @@ void disablePIT() {
 }
 
 void clearTimerStatusRegister() {
-  *PIT_PIVR; 
+  volatile int a = *PIT_PIVR; 
 }
 
-void delay(unsigned int miliseconds) {
+void delay(int miliseconds) {
   unsigned int counter;
+  
   enablePIT();
   for(counter = 0; counter < miliseconds; counter++) {
-    while(!checkIfStoppped);
+    enablePIT();
+    while(!checkIfTimerStoppped()){}
     clearTimerStatusRegister();
   }
   disablePIT();
